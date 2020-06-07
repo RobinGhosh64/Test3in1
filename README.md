@@ -1,26 +1,13 @@
-# salesforce_events_to_azure
-Capture Events from Salesforce and write into Azure Log Analytics using NodeJS
-
-Salesforce provides a way to generate events from objects, sobjects, platform and messaging channels.
-Details are here:
-https://developer.salesforce.com/docs/atlas.en-us.platform_events.meta/platform_events/platform_events_intro.htm
-
-This program reads Platform events from Salesforce, collects the data in Azure Log Analytics realtime and creates a streaming dashboard. Also, we can detect anamolies and alert on them.
-
-I use the Saleforce workbench for testing and pushing events out by forcing some API calls using the query method.
-Link to the workbench
-https://workbench.developerforce.com/restExplorer.php
+# Program demonstrates connecting to Bob Storage, SQL Server and Sales Force 
 
 
-You need a .env file with 6 key values.
+You need a .env file with key values. Here are some configuration variables that is required.
 <BR>
 SF_USERNAME=<Sales Force User ID><BR>
 SF_PASSWORD=<Sales Force password><BR>
-SF_CHANNEL=<Sales Force Channel path>  /event/ApiEventStream<BR>
-LAW_ID=<Log Analytics workspace id><BR>
-LAW_KEY=<Log Analytics primary or secondary key><BR>
-LAW_NAME=<Name of Log Analytics Log Type><BR>
-
+AZURE_STORAGE_CONNECTION_STRING=<KEY FROM YOUR BLOB STORAGE>
+    
+    
 
 To test locally:
     
