@@ -11,16 +11,16 @@
   "license": "ISC",
   "dependencies": {
     "aguid": "^1.0.4",
-    "azure-loganalytics": "^0.2.0",
+    "azure-storage": "^2.8.0",
     "body-parser": "^1.15.2",
     "cors": "^2.8.1",
     "dotenv": "^8.2.0",
     "express": "^4.14.0",
     "fs": "0.0.1-security",
     "jsforce": "^1.9.3",
+    "mssql": "^6.2.0",
     "path": "^0.12.7",
     "pg": "^7.11.0",
-    "randomstring": "^1.1.5",
     "request": "^2.79.0",
     "save": "^2.3.2"
   },
