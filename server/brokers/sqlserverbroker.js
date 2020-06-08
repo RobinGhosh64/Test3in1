@@ -7,14 +7,14 @@ if (process.env.NODE_ENV !== 'production') {
 
 const mssql = require('mssql')
 
-let result;
+let results;
 
 module.exports={
  
     /*
     *  Execute a sql query
     */
-   connect2SQLServer: async function  () {
+   connect2SQLServer: function  () {
        
         //console.log("Executing the sql: " + sqlstatement);
         
@@ -23,18 +23,27 @@ module.exports={
             password: process.env.SQL_PASSWORD,
             server: process.env.SQL_SERVER, 
             database: process.env.SQL_DATABASE,
-            enableArithAbort:true,
             encrypt: true // use this for Azure database encryption
         }
-        try {
-            mssql.connect(config)
-            result = mssql.query`select * from dbo.Transactions`
-        }
-        catch (error) {
-            console.log(error) 
-            return error;
-        }   
-        return result;
+	    mssql.connect(config).then(() => {
+
+		return mssql.query(`select * from dbo.Transactions`)}).then(result => {
+
+                console.log(result);
+                results = result;   // return our result set
+
+	    }).catch(err => {
+                console.log('Some error from query going on...', err);
+                results = err;      // return any error
+        })
+
+        mssql.on('error', err=> {
+                // ... sql on error handler
+                console.log('Some errorgoing on...', err);
+		        results = err;	   // return any error
+
+        })
+        return results;
        
        
     }

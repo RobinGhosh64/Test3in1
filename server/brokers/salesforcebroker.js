@@ -21,7 +21,7 @@ module.exports={
  
   
   /*
-  *  Listen for Platform Events or channel
+  *  Attempt to connect to sales force instance
   */
 
    connect2SF: function () {
