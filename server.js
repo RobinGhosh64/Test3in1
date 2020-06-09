@@ -27,7 +27,7 @@ var server = app.listen(port, function () {
    
    sf = brokerSF.connect2SF();
 
-   //ds = brokerDS.connect2SQLServer();
+   ds = brokerDS.connect2SQLServer();
 
 })
 
