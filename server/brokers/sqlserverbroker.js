@@ -4,51 +4,43 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
-
+let results;
 const mssql = require('mssql')
 
-let results;
+        
+const config = {
+    user: process.env.SQL_USERNAME,
+    password: process.env.SQL_PASSWORD,
+    server: process.env.SQL_SERVER, 
+    database: process.env.SQL_DATABASE,
+    encrypt: true // use this for Azure database encryption
+}
+
 
 module.exports={
  
     /*
-    *  Execute a sql query
+    *  Execute a sql query and return response to the called
     */
-   connect2SQLServer: function  () {
+   connect2SQLServer: function  (query,res) {
        
-        //console.log("Executing the sql: " + sqlstatement);
         
-        const config = {
-            user: process.env.SQL_USERNAME,
-            password: process.env.SQL_PASSWORD,
-            server: process.env.SQL_SERVER, 
-            database: process.env.SQL_DATABASE,
-            encrypt: true // use this for Azure database encryption
-        }
-	    mssql.connect(config).then(() => {
+        console.log('Query:' + query);
+        
+        mssql.connect(config, function (err) {
 
-		return mssql.query(`select * from dbo.Transactions`)}).then(result => {
+            if (err) {console.log(err); res.send(err); return;}
+            let sqlRequest = new mssql.Request();
 
-                console.log(result);
-                results = result;   // return our result set
-
-	    }).catch(err => {
-                console.log('Some error from query going on...', err);
-                results = err;      // return any error
-        })
-
-        mssql.on('error', err=> {
-                // ... sql on error handler
-                console.log('Some errorgoing on...', err);
-		        results = err;	   // return any error
-
-        })
-        return results;
+            sqlRequest.query(query, function (err,data) {
+                console.log(data);
+                let results = JSON.stringify(data);
+                mssql.close();
+                res.send(results);
+            });
+        });
        
        
     }
-
-    
-
 
 };
