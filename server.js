@@ -8,8 +8,14 @@ var sf,bs,ds = '';
 
 var app = express();
 
-app.get('/', function (req, res) {
-   res.send('Salesforce: ' + sf + ',Blob Storage: ' + bs + ',SQL-Server:' + ds);
+app.get('/', async function (req, res) {
+   console.log(req.query.sql);
+   res.send('Salesforce: ' + sf + ',Blob Storage: ' + bs + ',SQL-Server:' +  'To test SQL use /run?sql=select * from table');
+});
+
+app.get('/run', async function (req, res) {
+   console.log('Query=' + req.query.sql);
+   brokerDS.connect2SQLServer(req.query.sql,res);
 })
 
 var port = process.env.PORT || 3000;
@@ -27,21 +33,6 @@ var server = app.listen(port, function () {
    
    sf = brokerSF.connect2SF();
 
-   ds = brokerDS.connect2SQLServer();
+   //ds = brokerDS.connect2SQLServer();
 
 })
-
-
-
-
-
-  
-
- 
-
-
-
-
-
-
- 
