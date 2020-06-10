@@ -32,9 +32,9 @@ To test SQL, Run <website.azurewebsites.net/run?sql=select * from yourtable
 Go to **Deployment Center** and then use the **Sync** button on your right to repull the code again.
     This should download the latest code and republish your app.
 
-Give it 30 seconds. Go back to the website. Verify it shows /run?sql message. This is a must.
+Give it 30 seconds. Go back to the website. Verify it shows **To test SQL user /run?sql=select * from table** This is a must.
 
-To test SQL, Run <website.azurewebsites.net/run?sql=select * from yourtable
+To test SQL, Run <website.azurewebsites.net/run?sql=select * from yourtable 
 
-
+Hope this works!
 
